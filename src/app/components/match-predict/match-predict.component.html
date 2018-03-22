@@ -1,17 +1,13 @@
-<div class= "row valign-wrapper">
+<div class= "row valign-wrapper" > 
     <div class="col s12 m12">
         <div class="card blue-grey lighten-5">
           <div class="card-content white-text">
               <form action="#">
                   <span class="black-text">Toss Winner</span>
-                  <p>
-                    <input name="group1" type="radio" id="test1" class="with-gap"/>
-                    <label for="test1">Royal Challengers Bangalore</label>
-                  </p>
-                  <p>
-                    <input name="group1" type="radio" id="test2" class="with-gap"/>
-                    <label for="test2">Chennai Super Kings</label>
-                  </p>
+                  <div *ngFor="let team of todaysTeams; let i = index">
+                    <input name="grpTossWinner" type="radio" id="fToss{{i+1}}" class="with-gap" value="{{team.teamid}}" (change)="handleEvent($event, 'tossWinnerEvent')"/>
+                    <label for="fToss{{i+1}}">{{team.name}}</label>
+                  </div>
                 </form>
                       
           </div>
@@ -19,21 +15,23 @@
       </div>
   </div>
 
-  <div class= "row valign-wrapper">
+  <div class= "row valign-wrapper"> <!-- isDataLoaded function not working -->
       <div class="col s12 m12">
           <div class="card blue-grey lighten-5">
             <div class="card-content">
                 <form action="#">
                     <span class="black-text">Highest Scorer</span>
-                        <select class="blue-grey-text">
+                        <select class="blue-grey-text" id="scorerSelect" 
+                        (select)="handleEvent($event.target.value, 'highestScorerEvent')"
+                        (change)="handleEvent($event.target.value, 'highestScorerEvent')"
+                        (close)="handleEvent($event.target.value, 'highestScorerEvent')"> <!--  browser-default-->
                           <option value="" disabled selected>Choose player</option>
-                          <optgroup label="team 1">
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
+                          <optgroup label="{{todaysTeams[0].name}}">
+                              <option *ngFor="let member of todaysTeams[0].squad" value="{{member.pid}}" (click)="handleEvent($event.target.value, 'highestScorerEvent')">{{member.pname}}</option>
                           </optgroup>
-                          <optgroup label="team 2">
-                            <option value="3">Option 3</option>
-                            <option value="4">Option 4</option>
+
+                          <optgroup label="{{todaysTeams[1].name}}">
+                              <option *ngFor="let member of todaysTeams[1].squad" value="{{member.pid}}">{{member.pname}}</option>
                           </optgroup>
                         </select>
                     </form>
@@ -42,24 +40,23 @@
           </div>
         </div>
     </div>
-
+    
     <div class= "row valign-wrapper">
         <div class="col s12 m12">
             <div class="card blue-grey lighten-5">
               <div class="card-content">
                   <form action="#">
                       <span class="black-text">Highest Wicket Taker</span>
-                          <select>
-                            <option value="" disabled selected>Choose player</option>
-                            <optgroup label="team 1">
-                              <option value="1">Option 1</option>
-                              <option value="2">Option 2</option>
-                            </optgroup>
-                            <optgroup label="team 2">
-                              <option value="3">Option 3</option>
-                              <option value="4">Option 4</option>
-                            </optgroup>
-                          </select>
+                        <select class="blue-grey-text"> <!--  browser-default-->
+                          <option value="" disabled selected>Choose player</option>
+                          <optgroup label="{{todaysTeams[0].name}}">
+                              <option *ngFor="let member of todaysTeams[0].squad" value="{{member.pid}}">{{member.pname}}</option>
+                          </optgroup>
+
+                          <optgroup label="{{todaysTeams[1].name}}">
+                              <option *ngFor="let member of todaysTeams[1].squad" value="{{member.pid}}">{{member.pname}}</option>
+                          </optgroup>
+                        </select>
                       </form>
                           
               </div>
@@ -73,17 +70,16 @@
                 <div class="card-content white-text">
                     <form action="#">
                         <span class="black-text">Man of the Match</span>
-                            <select>
-                              <option value="" disabled selected>Choose player</option>
-                              <optgroup label="team 1">
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                              </optgroup>
-                              <optgroup label="team 2">
-                                <option value="3">Option 3</option>
-                                <option value="4">Option 4</option>
-                              </optgroup>
-                            </select>
+                          <select class="blue-grey-text"> <!--  browser-default-->
+                            <option value="" disabled selected>Choose player</option>
+                            <optgroup label="{{todaysTeams[0].name}}">
+                                <option *ngFor="let member of todaysTeams[0].squad" value="{{member.pid}}">{{member.pname}}</option>
+                            </optgroup>
+
+                            <optgroup label="{{todaysTeams[1].name}}">
+                                <option *ngFor="let member of todaysTeams[1].squad" value="{{member.pid}}">{{member.pname}}</option>
+                            </optgroup>
+                          </select>
                         </form>
                             
                 </div>
@@ -97,14 +93,10 @@
                   <div class="card-content white-text">
                       <form action="#">
                           <span class="black-text">Match Winner</span>
-                          <p>
-                            <input name="group2" type="radio" id="test3" class="with-gap"/>
-                            <label for="test3">Royal Challengers Bangalore</label>
-                          </p>
-                          <p>
-                            <input name="group2" type="radio" id="test4" class="with-gap"/>
-                            <label for="test4">Chennai Super Kings</label>
-                          </p>
+                          <div *ngFor="let team of todaysTeams; let i = index">
+                              <input name="grpMatchWinner" type="radio" id="fMatch{{i+1}}" class="with-gap"/>
+                              <label for="fMatch{{i+1}}">{{team.name}}</label>
+                            </div>
                         </form>
                               
                   </div>
@@ -128,3 +120,5 @@
                   </div>
                 </div>
             </div>
+
+            

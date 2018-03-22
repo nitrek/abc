@@ -1,34 +1,15 @@
-<div class= "row valign-wrapper">
+<div *ngFor="let match of todaysMatches; let i = index" class= "row valign-wrapper">
   <div class="col s12 m12">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
-          <span class="card-title center-align" >Match 1</span>
-          <p class="center-align">Royal Challengers Bangalore</p>
-          <p class="center-align">v/s</p>
-          <p class="center-align">Chennai Super Kings</p>
+          <span class="card-title center-align" >Match {{i + 1}}</span>
+          <p class="center-align">{{match.team1}}</p>
+          <p class="center-align">v</p>
+          <p class="center-align">{{match.team2}}</p>
         </div>
         <div class="card-action center-align">
-          <a href="#">Click to predict</a>
+          <a routerLink="/matchpredict">&nbsp;&nbsp;&nbsp;&nbsp;Click to predict</a>
         </div>
       </div>
     </div>
 </div>
-
-<div class="row valign-wrapper">
-    <div class="col s12 m12">
-      <a href="#">
-          <div class="card blue-grey darken-1">
-              <div class="card-content white-text">
-                <span class="card-title center-align" >Match 2</span>
-                <p class="center-align">Mumbai Indians</p>
-                <p class="center-align">v/s</p>
-                <p class="center-align">Rajasthan Royals</p>
-              </div>
-              <div class="card-action center-align">
-                <a href="#">Click to predict</a>
-              </div>
-            </div>
-      </a>
-      
-    </div>
-  </div>
